@@ -1,4 +1,5 @@
 import User from './model.js';
+import fs from 'fs';
 
 export const listUser = async (req, res, next) => {
     try {
@@ -20,7 +21,6 @@ export const indexUser = async (req, res, next) => {
 }
 
 export const addUser = async (req, res, next) => {
-    console.log(req.body)
     try {
         let payload = req.body;
        
@@ -44,5 +44,21 @@ export const addUser = async (req, res, next) => {
             })
         }
         next(err)
+    }
+};
+
+export const updateUser = async (req, res, next) => {
+    try {
+        const {id} = req.params;
+        const payload = req.body;
+        
+        if(req.file){
+            let fileName = req.file.filename;
+            let user = await User.findByIdAndUpdate(id, {...payload, foto:fileName});
+            return res.json(user);
+        }
+
+    } catch (err) {
+        next(err);
     }
 }
