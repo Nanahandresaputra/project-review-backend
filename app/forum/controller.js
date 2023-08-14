@@ -37,3 +37,13 @@ export const createForum = async (req, res, next) => {
     next(err);
   }
 };
+
+export const deleteForum = async (req, res, next) => {
+  try {
+    const {id} = req.params;
+    const forum = await Forum.findByIdAndDelete(id);
+    return res.json(forum);
+  } catch (err) {
+    next(err);
+  }
+}
