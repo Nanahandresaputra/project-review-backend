@@ -4,7 +4,6 @@ import cors from "cors";
 import path from "path";
 import db from "./db/db.js";
 import userRouter from "./app/user/router.js";
-import quesionareRouter from "./app/quesionare/router.js";
 import forumRouter from "./app/forum/router.js";
 
 const app = express();
@@ -22,7 +21,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/", userRouter);
-app.use("/api/", quesionareRouter);
 app.use("/api/", forumRouter);
 
 app.use((req, res) => {
